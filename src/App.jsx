@@ -1,7 +1,6 @@
-import { GameHeader } from "./components/GameHeader"
-import { Card } from "./components/Card"
-import { use, useEffect, useState } from "react"
-
+import { GameHeader } from "./components/GameHeader";
+import { Card } from "./components/Card";
+import { use, useEffect, useState } from "react";
 
 const cardValues = [
   "👾",
@@ -20,24 +19,23 @@ const cardValues = [
   "🤖",
   "🖥",
   "📦",
-]
+];
 
 function App() {
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
+  const [flippedCards, setFlippedCards] = useState([]);
 
   const initializeGame = () => {
     //SHUFFLE CARDS
-    const finalCards = cardValues.map((value, index) => (
-      {
-        id: index,
-        value,
-        isFLipped: false,
-        isMatched: false,
-      }
-    ))
+    const finalCards = cardValues.map((value, index) => ({
+      id: index,
+      value,
+      isFlipped: false,
+      isMatched: false,
+    }));
 
-    serCards(finalCards);
-  }
+    setCards(finalCards);
+  };
 
   useEffect(() => {
     initializeGame();
@@ -49,10 +47,38 @@ function App() {
     }
 
     const newCards = cards.map((c) => {
-      if (c.id === card.id){
-        return{...c, isFlipped: true };
-      } else {}
+      if (c.id === card.id) {
+        return { ...c, isFlipped: true };
+      } else {
+        return c;
+      }
     });
+
+    setCards(newCards);
+
+    const newFlippedCards = [...flippedCards, card.id];
+    setFlippedCards(newFlippedCards);
+
+    if (flippedCards.length === 1) {
+      const firstCard = cards[flippedCards[0]];
+
+      if (firstCard.value === card.value) {
+        alert("Match");
+      } else {
+        setTimeout(() => {}, 1000);
+
+        const flippedBackCard = newCards.map((c) => {
+          if (newFlippedCards.includes(c.id) || c.id === card.id) {
+            return { ...c, isFlipped: false };
+          } else {
+            return c;
+          }
+        });
+
+        setCards(flippedBackCard);
+      }
+      1000;
+    }
   };
 
   return (
@@ -65,9 +91,7 @@ function App() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
-
-
+export default App;
