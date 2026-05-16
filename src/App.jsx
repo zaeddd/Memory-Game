@@ -35,6 +35,7 @@ function App() {
   return (
     <div className="app">
       <GameHeader score={score} moves={moves} onReset={initializeGame} />
+
       {isGameComplete && <WinMessage moves={moves} />}
 
       <div className="cards-grid">
