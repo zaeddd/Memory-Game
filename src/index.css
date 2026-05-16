@@ -190,9 +190,9 @@ body {
 }
 
 .card.matched .card-back {
-  background: rgba(126, 211, 33, 0.2);
-  box-shadow: 0 0 20px rgba(126, 211, 33, 0.4);
-  border: 2px solid rgba(126, 211, 33, 0.5);
+  background: rgba(149, 33, 211, 0.2);
+  box-shadow: 0 0 20px rgba(184, 33, 211, 0.4);
+  border: 2px solid rgba(92, 33, 211, 0.5);
 }
 
 .card:hover:not(.matched):not(.flipped) .card-front {
